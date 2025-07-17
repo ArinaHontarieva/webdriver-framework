@@ -1,14 +1,14 @@
 package tests;
 
+import models.UserFactory;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class EndToEndNegativeTests extends BaseTest {
 
     @Test(description = "Verify registration fails with invalid data and proper validation errors are shown")
-    public void testRegistrationWithInvalidData() {
+    public void testRegistrationWithInvalidData() throws InterruptedException {
         SoftAssert softAssert = new SoftAssert();
-
         openWelcomePageAndClickLogin();
         softAssert.assertTrue(isHeaderPresent("h1", "Ласкаво просимо до Wantora!"),
             "Login page header is not displayed as expected");
@@ -17,11 +17,7 @@ public class EndToEndNegativeTests extends BaseTest {
         softAssert.assertTrue(isHeaderPresent("h1", "Реєстрація в Wantora"),
             "Register page header is not displayed as expected");
 
-        fillRegistrationFormAndSubmit(
-            " ", " ",
-            "invalidemail",
-            "password", "pasword",
-            "01012025");
+        fillRegistrationFormAndSubmit(UserFactory.getInvalidUser());
 
         softAssert.assertTrue(isErrorVisibleById("emptyFname"),
             "Expected error for empty first name is not displayed");

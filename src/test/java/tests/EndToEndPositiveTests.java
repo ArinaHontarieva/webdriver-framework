@@ -1,5 +1,6 @@
 package tests;
 
+import models.UserFactory;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,11 +18,7 @@ public class EndToEndPositiveTests extends BaseTest {
         softAssert.assertTrue(isHeaderPresent("h1","Реєстрація в Wantora"),
             "Register page header is not displayed as expected");
 
-        fillRegistrationFormAndSubmit(
-            "Test", "Testov",
-            "test_testov@gmail.com",
-            "Password123", "Password123",
-            "01012000");
+        fillRegistrationFormAndSubmit(UserFactory.getValidUser());
         softAssert.assertTrue(isHeaderPresent("h1","Мої вішлісти"),
             "Main page header is not displayed as expected");
 
@@ -35,6 +32,8 @@ public class EndToEndPositiveTests extends BaseTest {
             "Success message for profile update is not displayed");
 
         deleteUserAccount();
+        softAssert.assertTrue(isHeaderPresent("h1","Створи вішліст "),
+            "Welcome page header is not displayed as expected");
 
         softAssert.assertAll();
     }
@@ -51,11 +50,7 @@ public class EndToEndPositiveTests extends BaseTest {
         softAssert.assertTrue(isHeaderPresent("h1","Реєстрація в Wantora"),
             "Register page header is not displayed as expected");
 
-        fillRegistrationFormAndSubmit(
-            "Test", "Testov",
-            "test_testov@gmail.com",
-            "Password123", "Password123",
-            "01012000");
+        fillRegistrationFormAndSubmit(UserFactory.getValidUser());
         softAssert.assertTrue(isHeaderPresent("h1","Мої вішлісти"),
             "Main page header is not displayed as expected");
 
@@ -83,6 +78,8 @@ public class EndToEndPositiveTests extends BaseTest {
             "Profile page header is not displayed as expected");
 
         deleteUserAccount();
+        softAssert.assertTrue(isHeaderPresent("h1","Створи вішліст "),
+            "Welcome page header is not displayed as expected");
 
         softAssert.assertAll();
     }
